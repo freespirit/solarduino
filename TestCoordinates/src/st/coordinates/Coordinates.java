@@ -1,4 +1,4 @@
-package st.solartracker.coordinates;
+package st.coordinates;
 
 import java.lang.Math;
 import java.util.Calendar;
