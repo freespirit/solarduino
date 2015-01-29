@@ -4,6 +4,11 @@ import java.lang.Math;
 import java.util.Calendar;
 
 public class Coordinates {
+	public static final double J2000 = 2451545.0;
+	public static final double observerLatitude = 42.67464254549345;
+	public static final double observerLongtitude = 23.330283164978027;
+	
+	
 	
 	public static void main(String[] args) {
 		Coordinates c = new Coordinates();
@@ -59,6 +64,14 @@ public class Coordinates {
 
 
 		//  3. convert to the horizontal coordinate system, for the observer's local time and position.
+		// NOTE: Azimuth is measured from the south point
+		double timeSinceEpoch = JD - J2000; 
+		double GST = 18.697374558 + 24.06570982441908 * timeSinceEpoch; //Greenwich Sidereal Time, based on http://en.wikipedia.org/wiki/Sidereal_time
+		int times24 = (int) (GST / 24.0);
+		GST -= times24*24.0;
+		
+		double hourAngle = GST - observerLongtitude - RA;//TODO needs verification/vaidation
+		System.out.println("hour angle: " + hourAngle);
 
 	}
 
