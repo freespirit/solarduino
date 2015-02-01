@@ -1,14 +1,9 @@
 package st.coordinates;
 
 import java.lang.Math;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.TimeZone;
-import java.util.concurrent.TimeUnit;
 
 public class Coordinates {
 	public static final double J2000 = 2451545.0;
@@ -77,14 +72,11 @@ public class Coordinates {
 		GST = scaleFromZero(GST, siderealDay);
 		
 		double gstDegs = (GST/siderealDay)*360.0;
-		
 		double hourAngle = gstDegs + observerLongtitude - RA;
 		while(hourAngle < 0)
 			hourAngle += 360.0;
 		scaleFromZero(hourAngle, 360.0);
 		System.out.println("GST: " + GST + "(degs: " + gstDegs + ")" + " hour angle: " + hourAngle);
-
-		
 		
 		double tanAz =
 				sin(hourAngle) /
@@ -144,9 +136,9 @@ public class Coordinates {
 		then.set(2000, 0, 1, 12, 0, 0);
 		
 		double days = (now.getTimeInMillis() - then.getTimeInMillis()) / ((double) MILLIS_IN_DAY);
-		System.out.println(now.getTime().toString());
-		System.out.println(new Date(then.getTimeInMillis()).toString());
-		System.out.println(new Date(then.getTimeInMillis() + (long)(days * (double)MILLIS_IN_DAY)).toString() + " days: " + days); 
+//		System.out.println(now.getTime().toString());
+//		System.out.println(new Date(then.getTimeInMillis()).toString());
+//		System.out.println(new Date(then.getTimeInMillis() + (long)(days * (double)MILLIS_IN_DAY)).toString() + " days: " + days); 
 		return days;
 	}
 }
