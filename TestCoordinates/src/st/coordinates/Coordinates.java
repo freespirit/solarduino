@@ -17,7 +17,14 @@ public class Coordinates {
 	public static void main(String[] args) {
 		Coordinates c = new Coordinates();
 		
-		c.sunHorizontalCoordinates();
+		try {
+			while(true) {//lame
+				c.sunHorizontalCoordinates();
+				Thread.sleep(4000);
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	void sunHorizontalCoordinates() {
@@ -60,7 +67,7 @@ public class Coordinates {
 			RA += 360.0;
 		
 		RA = scaleFromZero(RA, 360.0);
-		System.out.println("RA: " + RA + " DEC: " + Dec);
+//		System.out.println("RA: " + RA + " DEC: " + Dec);
 
 
 		
@@ -88,7 +95,14 @@ public class Coordinates {
 		double azimuth = Math.toDegrees( Math.atan(tanAz) );
 		double altitude = Math.toDegrees( Math.asin(sinAlt) );
 		
-		System.out.println("AZ: " + azimuth + " ALT: " + altitude);
+//		System.out.println("AZ: " + azimuth + " ALT: " + altitude);
+		
+		String coordinates = String.format(
+				"%s: ra:%2$,.2f dec: %3$,.2f az:%4$,.2f alt:%5$,.2f",
+				Calendar.getInstance().getTime().toString(),
+				RA, Dec, azimuth, altitude);
+		
+		System.out.println(coordinates);
 				
 	}
 
@@ -103,7 +117,7 @@ public class Coordinates {
 		int year = now.get(Calendar.YEAR);
 		int month = now.get(Calendar.MONTH) + 1;
 		int day = now.get(Calendar.DAY_OF_MONTH);
-		System.out.println(now.get(Calendar.HOUR_OF_DAY) + ":" + now.get(Calendar.MINUTE) + ":" + now.get(Calendar.SECOND));
+//		System.out.println(now.get(Calendar.HOUR_OF_DAY) + ":" + now.get(Calendar.MINUTE) + ":" + now.get(Calendar.SECOND));
 		
 		int a = (14-month)/12;
 		int y = year + 4800 - a;
@@ -138,7 +152,8 @@ public class Coordinates {
 		double days = (now.getTimeInMillis() - then.getTimeInMillis()) / ((double) MILLIS_IN_DAY);
 //		System.out.println(now.getTime().toString());
 //		System.out.println(new Date(then.getTimeInMillis()).toString());
-//		System.out.println(new Date(then.getTimeInMillis() + (long)(days * (double)MILLIS_IN_DAY)).toString() + " days: " + days); 
+//		System.out.println(new Date(then.getTimeInMillis() + (long)(days * (double)MILLIS_IN_DAY)).toString() + " days: " + days);
+		System.out.println(days);
 		return days;
 	}
 }
